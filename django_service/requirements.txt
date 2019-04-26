@@ -1,0 +1,4 @@
+Django<2.2
+psycopg2>=2.7,<3.0
+PyMySQL
+gunicorn <=19.9

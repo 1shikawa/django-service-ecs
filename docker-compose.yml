@@ -1,0 +1,70 @@
+version: '3'
+services:
+  django-service:
+   container_name: django.service
+   restart: always
+   build: ./django_service
+   expose:
+     - "8000"
+   depends_on:
+     - db
+   command: >
+     bash -c "python manage.py makemigrations
+     && python manage.py migrate
+     && python manage.py collectstatic --noinput
+     && python manage.py custom_createsuperuser --username admin --email admin@example.com --password admin
+     && gunicorn django_service.wsgi -b 0.0.0.0:8000"
+   volumes:
+     - ./django_service:/usr/src/app
+     - ./static/:/usr/src/app/static
+   env_file:
+     - ./envs/db.env
+
+  nginx:
+    container_name: nginx
+    restart: always
+#    image: nginx
+    build: ./nginx
+    ports:
+      - "80:80"
+    volumes:
+      - "./nginx/:/etc/nginx/"
+      - "./static:/usr/src/app/static/"
+    depends_on:
+      - django-service
+
+  db:
+   container_name: db
+   restart: always
+#   build: ./mysql
+   image: mysql:5.7
+   ports:
+     - 3306:3306
+   environment:
+     MYSQL_ROOT_PASSWORD: mysitepass
+     TZ: 'Asia/Tokyo'
+   volumes:
+      - mysql.db.volume:/var/lib/mysql
+      - ./mysql/sql:/docker-entrypoint-initdb.d
+
+volumes:
+  mysql.db.volume:
+    driver: local
+  static:
+
+
+#  db:
+#   container_name: django.db
+#   restart: always
+#   build: ./postgres
+#   ports:
+#     - 5432:5432
+#   volumes:
+#     - ./postgres/docker-entrypoint-initdb.d/:/docker-entrypoint-initdb.d/
+#     - pgdata:/var/lib/postgresql/data
+#   env_file:
+#     - ./envs/db.env
+#volumes:
+#  pgdata:
+#    driver: "local"
+#  static:
