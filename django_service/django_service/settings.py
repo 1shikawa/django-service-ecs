@@ -92,7 +92,7 @@ DATABASES = {
         'NAME': 'mysite',
         'USER': 'mysiteuser',
         'PASSWORD': 'mysitepass',
-        'HOST': 'mysite.ceqjvsgw7652.ap-northeast-1.rds.amazonaws.com',
+        'HOST': 'django-service.ceqjvsgw7652.ap-northeast-1.rds.amazonaws.com',
         # 'HOST': 'db',
         'PORT': '3306',
         'OPTIONS': {'charset': 'utf8mb4'}
