@@ -24,12 +24,12 @@ jobs:
             - ".venv"
             - "/usr/local/bin"
             - "/usr/local/lib/python3.7/site-packages"
-      - run:
-          name: "before_test: migrate"
-          command: docker-compose run django-service python manage.py migrate
-      - run:
-          command: |
-            docker-compose run django-service pipenv run "python manage.py test"
+      # - run:
+      #     name: "before_test: migrate"
+      #     command: docker-compose run django-service python manage.py migrate
+      # - run:
+      #     command: |
+      #       docker-compose run django-service pipenv run "python manage.py test"
       - store_test_results:
           path: test-results
       - store_artifacts:
