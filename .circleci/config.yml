@@ -174,7 +174,7 @@ jobs:
           command: |
             aws ecs describe-task-definition --task-definition django-service |
             jq '.taskDefinition | { containerDefinitions: .containerDefinitions }' > definition.json
-            # aws ecs update-service --cluster django-cluster --service django-service --task-definition django-service
+        
       - aws-ecs/update-service:
           family: "${ECS_SERVICE_NAME}"
           cluster-name: "${ECS_CLUSTER_NAME}"
