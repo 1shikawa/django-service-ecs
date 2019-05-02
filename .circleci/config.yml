@@ -94,8 +94,8 @@
 
 version: 2.1
 orbs:
-  aws-ecr: circleci/aws-ecr@0.0.2
-  aws-ecs: circleci/aws-ecs@0.0.8
+  aws-cli: circleci/aws-cli@0.1.4
+  aws-ecs: circleci/aws-ecs@0.0.3
 jobs:
   build_test:
     machine:
@@ -174,12 +174,8 @@ jobs:
           command: |
             aws ecs describe-task-definition --task-definition django-service |
             jq '.taskDefinition | { containerDefinitions: .containerDefinitions }' > definition.json
-            # aws ecs update-service --cluster django-cluster --service django-service --task-definition django-service
-      - aws-ecs/deploy-service-update:
-          aws-region: ${AWS_DEFAULT_REGION}
-          family: "${AWS_RESOURCE_NAME_PREFIX}-service"
-          cluster-name: "${AWS_RESOURCE_NAME_PREFIX}-cluster"
-          container-image-name-updates: "container=${AWS_RESOURCE_NAME_PREFIX}-service,tag=${CIRCLE_SHA1}"
+            aws ecs register-task-definition --family django-service --cli-input-json file://definition.json
+            aws ecs update-service --cluster django-cluster --service django-service --task-definition django-service
       - run:
           name: migration
           command: |
