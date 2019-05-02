@@ -103,4 +103,6 @@ venv.bak/
 .mypy_cache/
 
 .idea/
+static/
 .terraform/
+.vscode/

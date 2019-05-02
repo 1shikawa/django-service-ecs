@@ -14,7 +14,7 @@
         "containerPort": 8000
       }
     ],
-    "command": 	["bash","-c","python manage.py collectstatic --noinput && python manage.py makemigrations && python manage.py migrate && python manage.py custom_createsuperuser --username admin --email admin@example.com --password admin && gunicorn django_dev.wsgi -b 0.0.0.0:8000"],
+    "command": 	["bash","-c","python manage.py collectstatic --noinput && python manage.py custom_createsuperuser --username admin --email admin@example.com --password admin && gunicorn django_service.wsgi -b 0.0.0.0:8000"],
     "environment": [
       {
         "name": "VERSION_INFO",

@@ -13,7 +13,7 @@
         "containerPort": 8000
       }
     ],
-    "command": ["python3", "manage.py", "migrate"],
+    "command": ["bash","-c","python manage.py makemigrations && python manage.py migrate"],
     "environment": [
       {
         "name": "VERSION_INFO",
