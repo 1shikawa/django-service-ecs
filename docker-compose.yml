@@ -1,7 +1,7 @@
 version: '3'
 services:
   django-service:
-   container_name: django.service
+   container_name: django-service
    restart: always
    build: ./django_service
    expose:
