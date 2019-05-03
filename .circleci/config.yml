@@ -17,7 +17,7 @@ jobs:
       - run:
           name: Run Test
           command: |
-            docker-compose exec django-service pytest
+            docker-compose run django-service pytest
       - store_test_results:
           path: test-results
       - store_artifacts:
@@ -78,10 +78,10 @@ jobs:
       - run:
           name: deploy
           command: |
-            aws ecs describe-task-definition --task-definition django-service | 
+            aws ecs describe-task-definition --task-definition ${ECS_SERVICE_NAME} | 
             jq '.taskDefinition | { containerDefinitions: .containerDefinitions, volumes: .volumes }' > definition.json
-            aws ecs register-task-definition --family django-service --cli-input-json file://definition.json
-            aws ecs update-service --cluster django-cluster --service django-service --task-definition django-service
+            aws ecs register-task-definition --family ${ECS_SERVICE_NAME} --cli-input-json file://definition.json
+            aws ecs update-service --cluster ${ECS_CLUSTER_NAME} --service ${ECS_SERVICE_NAME} --task-definition ${ECS_SERVICE_NAME}
       - run:
           name: migration
           command: |
