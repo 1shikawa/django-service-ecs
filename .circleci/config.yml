@@ -106,6 +106,6 @@ workflows:
       - build_images-push:
           requires:
             - build-test
-      - deploy:
+      - deploy-test:
           requires:
             - build_images-push
