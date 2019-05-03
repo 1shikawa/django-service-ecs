@@ -1,6 +1,6 @@
 version: 2.1
 jobs:
-  build & test:
+  build-test:
     machine:
       image: circleci/classic:edge
     steps:
@@ -27,7 +27,7 @@ jobs:
           name: docker-compose down
           command: docker-compose down
 
-  build image & push:
+  build_images-push:
     docker:
       - image: docker:18.09.0
     steps:
@@ -52,7 +52,7 @@ jobs:
             docker push ${ECR_DOMAIN}/nginx:$CIRCLE_SHA1
             docker push ${ECR_DOMAIN}/nginx:latest
 
-  deploy & test:
+  deploy-test:
     docker:
       - image: circleci/python:3.7
     steps:
@@ -102,10 +102,10 @@ workflows:
   version: 2
   build_and_deploy:
     jobs:
-      - build & test
-      - build image & push:
+      - build-test
+      - build_image-push:
           requires:
-            - build & test
+            - build-test
       - deploy:
           requires:
-            - build image & push
+            - build_image-push
