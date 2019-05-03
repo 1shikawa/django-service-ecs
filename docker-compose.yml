@@ -15,7 +15,7 @@ services:
      && python manage.py custom_createsuperuser --username admin --email admin@example.com --password admin
      && gunicorn django_service.wsgi -b 0.0.0.0:8000"
    environment:
-     - DJANGO_SETTINGS_MODULE=django_service.settings
+     - DJANGO_SETTINGS_MODULE=django_service.ci_settings
    volumes:
      - ./django_service:/usr/src/app
      - ./static/:/usr/src/app/static
