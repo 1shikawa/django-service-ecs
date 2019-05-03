@@ -23,7 +23,8 @@
         "ecs:RunTask",
         "ecs:DescribeTasks",
         "ecs:ListTasks",
-        "iam:PassRole"
+        "iam:PassRole",
+        "elasticloadbalancing:*"
       ],
       "Resource": "*"
     }
