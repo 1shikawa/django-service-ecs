@@ -103,9 +103,9 @@ workflows:
   build_and_deploy:
     jobs:
       - build-test
-      - build_image-push:
+      - build_images-push:
           requires:
             - build-test
       - deploy:
           requires:
-            - build_image-push
+            - build_images-push
