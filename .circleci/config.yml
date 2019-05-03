@@ -6,29 +6,18 @@ jobs:
     steps:
       - checkout
       - run:
-          name: docker-compose build
+          name: Build Containers
           command: docker-compose build
       - run:
-          name: docker-compose up
+          name: Start Containers
           command: docker-compose up -d
       - run:
           name: sleep for waiting launch db
           command: sleep 10
       - run:
-          name: "install pipenv"
+          name: Run Test
           command: |
-            docker-compose run django-service pip install pipenv
-            docker-compose run django-service pipenv install
-      - save_cache:
-          key: deps9-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
-          paths:
-            - ".venv"
-            - "/usr/local/bin"
-            - "/usr/local/lib/python3.7/site-packages"
-      - run:
-          name: test
-          command: |
-            docker-compose exec django-service python manage.py test
+            docker-compose exec django-service pytest
       - store_test_results:
           path: test-results
       - store_artifacts:
