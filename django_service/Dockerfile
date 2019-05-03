@@ -1,4 +1,4 @@
-FROM python:3.7-alpine
+FROM python:3.7
 ENV PYTHONUNBUFFERED 1
 RUN pip install -U pip 
 RUN mkdir -p /usr/src/app
