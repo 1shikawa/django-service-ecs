@@ -70,20 +70,21 @@ jobs:
           command: |
             echo 'export ECS_CLUSTER_NAME="${AWS_RESOURCE_NAME_PREFIX}-cluster"' >> $BASH_ENV
             echo 'export ECS_SERVICE_NAME="${AWS_RESOURCE_NAME_PREFIX}-service"' >> $BASH_ENV
+            echo 'export TASK_DEFINITION_NAME="${AWS_RESOURCE_NAME_PREFIX}-service"' >> $BASH_ENV
             echo 'export FULL_IMAGE_NAME="${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${AWS_RESOURCE_NAME_PREFIX}:${CIRCLE_SHA1}"' >> $BASH_ENV
       - run:
-          name: login
+          name: aws ecr login
           command: |
             $(aws ecr get-login --no-include-email --region ${AWS_DEFAULT_REGION})
       - run:
-          name: deploy
+          name: aws ecs deploy
           command: |
-            aws ecs describe-task-definition --task-definition ECS_SERVICE_NAME | 
+            aws ecs describe-task-definition --task-definition $TASK_DEFINITION_NAME | 
             jq '.taskDefinition | { containerDefinitions: .containerDefinitions, volumes: .volumes }' > definition.json
-            aws ecs register-task-definition --family ECS_SERVICE_NAME --cli-input-json file://definition.json
-            aws ecs update-service --cluster ECS_CLUSTER_NAME --service ECS_SERVICE_NAME --task-definition ECS_SERVICE_NAME
+            aws ecs register-task-definition --family $ECS_SERVICE_NAME --cli-input-json file://definition.json
+            aws ecs update-service --cluster $ECS_CLUSTER_NAME --service $ECS_SERVICE_NAME --task-definition $TASK_DEFINITION_NAME
       - run:
-          name: migration
+          name: ecs migration
           command: |
             aws ecs run-task --cluster django-cluster --task-definition django-migrate
 
