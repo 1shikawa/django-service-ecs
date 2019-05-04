@@ -3,4 +3,5 @@ psycopg2>=2.7,<3.0
 PyMySQL
 gunicorn <=19.9
 pytest
+pytest-cov
 pytest-django

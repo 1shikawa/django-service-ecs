@@ -17,7 +17,7 @@ jobs:
       - run:
           name: Run Test
           command: |
-            docker-compose run django-service pytest
+            docker-compose run django-service pytest -v
       - store_test_results:
           path: test-results
       - store_artifacts:

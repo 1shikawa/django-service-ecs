@@ -7,8 +7,6 @@ resource "aws_ecs_service" "django-service" {
 
   load_balancer {
     target_group_arn = "${aws_lb_target_group.http.arn}"
-//    container_name   = "django-service"
-//    container_port   = "8000"
     container_name   = "nginx"
     container_port   = "80"
   }

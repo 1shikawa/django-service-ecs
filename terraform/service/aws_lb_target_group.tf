@@ -1,6 +1,5 @@
 resource "aws_lb_target_group" "http" {
   name     = "django-http"
-//  port     = 8000
   port     = 80
   protocol = "HTTP"
   vpc_id   = "${data.terraform_remote_state.vpc.vpc_id}"
