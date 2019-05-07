@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+<head>
+    {% block title %}月次集計一覧{% endblock %}
+</head>
+
+{% block extracss %}
+
+{% endblock %}
+
+<body>
+{% block content %}
+    <div class="col-md-12 main">
+        <h4 class="page-header">月次集計一覧</h4>
+        <form class="form-inline my-2 my-lg-0" method="get" action="{% url 'mycalendar:MonthlySumList' %}">
+            <input class="form-control mr-sm-2" type="month" min="2018-01" max="201-12" aria-label="Search"
+                   name="keyword1">
+            <input class="form-control mr-sm-2" type="text" aria-label="Search" name="keyword2">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+        <div class="table-sm">
+            <table class="table table-bordered table-hover">
+                <thead>
+                <tr class="table-primary">
+                    <th>期間</th>
+                    <th>大項目</th>
+                    <th>総工数</th>
+                    <th>登録者</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for sum in MonthlySumList %}
+                    <tr>
+                        <td>{{ year_month }}</td>
+                        <td>{{ sum.LargeItem__name }}</td>
+                        <td>{{ sum.MonthlySum }}</td>
+                        <td>{{ sum.register }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            {% csrf_token %}
+        </div>
+
+        <div class="col-md-2">
+            <span>集計データをCSV出力</span><br>
+            <form action="{% url 'mycalendar:SumExport' %}" method="get">
+                <input class="form-control mr-sm-2" type="month" min="2018-01" max="2019-12" aria-label="Search"
+                       name="csvexport">
+                <button class="btn btn-primary " type="submit">CSV出力</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
+    <script>
+    {% block extrajs %}
+        var ctx = document.getElementById("PieChart1").getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: [{% for index, row in df.iterrows %}
+                    '{{ row.LargeItemLabel }}',
+                {% endfor %}],
+                datasets: [{
+                    backgroundColor: [
+                        "#2ecc71",
+                        "#3498db",
+                        "#95a5a6",
+                        "#9b59b6",
+                        "#f1c40f",
+                        "#e74c3c",
+                        "#34495e"
+                    ],
+                    data: [{% for index, row in df.iterrows %}
+                        {{ row.kosu }},
+                    {% endfor %}],
+                }]
+            },
+            options: {
+                title: {
+                    display: true,
+                    position: 'bottom',
+                    fontSize: 15,
+                    {#text: 'admin'#}
+                }
+            }
+        });
+    {% endblock %}
+{% endblock %}
+</body>

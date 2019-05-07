@@ -20,4 +20,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     # path('', sample.views.hello),
     path('', include('Sample.urls')),
+    path('', include('mycalendar.urls')),
 ]

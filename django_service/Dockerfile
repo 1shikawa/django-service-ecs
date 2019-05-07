@@ -9,3 +9,5 @@ RUN pip install -r requirements.txt
 ADD . /usr/src/app/
 #CMD ["python3", "manage.py", "collectstatic" , "--noinput" ]
 #CMD ["python3", "manage.py", "runserver", "0.0.0.0:8000"]
+# CMD ["python", "manage.py", "makemigrations"]
+# CMD ["python", "manage.py", "migrate"]

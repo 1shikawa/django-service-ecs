@@ -13,11 +13,13 @@
 </head>
 
 <body>
-<div class="container"
-{% for item in sample %}
-    {{ item.id }}<br>
-    {{ item.title }}
-{% endfor %}
+<div class="container">
+    <h5>sample</h5>
+    {% for item in sample %}
+        {{ item.id }}
+        {{ item.title }}
+        {{ item.name }}
+    {% endfor %}
 </div>
 </body>
 </html>

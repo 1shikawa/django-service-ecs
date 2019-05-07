@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'Sample.apps.SampleConfig',
+    'mycalendar',
+    'bootstrap4',
 ]
 
 MIDDLEWARE = [
@@ -98,6 +100,14 @@ DATABASES = {
         'OPTIONS': {'charset': 'utf8mb4'}
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#         'ATOMIC_REQUESTS': True,
+#     }
+# }
 
 
 # Password validation
