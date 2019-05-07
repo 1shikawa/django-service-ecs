@@ -12,7 +12,7 @@ services:
      bash -c "python manage.py makemigrations
      && python manage.py migrate
      && python manage.py collectstatic --noinput
-     && python manage.py custom_createsuperuser --username admin --email admin@example.com --password admin
+     && python manage.py custom_createsuperuser --email admin@example.com --password admin
      && gunicorn django_service.wsgi -b 0.0.0.0:8000"
    environment:
      - DJANGO_SETTINGS_MODULE=django_service.ci_settings

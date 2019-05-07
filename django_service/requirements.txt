@@ -1,5 +1,6 @@
 Django<2.2
 psycopg2>=2.7,<3.0
+django-allauth
 PyMySQL
 gunicorn <=19.9
 python-dateutil

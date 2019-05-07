@@ -3,15 +3,15 @@ import logging
 import csv
 import datetime
 from datetime import timedelta
-from django.utils.decorators import method_decorator  # @method_decoratorに使用
-from django.contrib.auth.decorators import login_required  # @method_decoratorに使用
+# from django.utils.decorators import method_decorator  # @method_decoratorに使用
+# from django.contrib.auth.decorators import login_required  # @method_decoratorに使用
 from django.contrib import messages  # メッセージフレームワーク
 from django.shortcuts import reverse, redirect, resolve_url
 from django.http import HttpResponse
 from django.urls import reverse_lazy
 from django.views import generic
 from mycalendar.models import Schedule, LargeItem
-# from accounts.models import CustomUser, Profile
+from accounts.models import CustomUser
 from .forms import BS4ScheduleForm, BS4ScheduleNewFormSet, BS4ScheduleEditFormSet
 # from accounts.forms import ProfileUpdateForm, ContactForm
 # from formtools.preview import FormPreview
@@ -336,3 +336,56 @@ class Chart(generic.ListView):
         context['df'] = sorted_grouped_df
         context['register'] = sorted_grouped_df['register'].drop_duplicates().reset_index()
         return context
+
+
+class Graph(generic.TemplateView):
+    """指定グラフ表示"""
+    model = Schedule
+    context_object_name = 'Graph'
+    template_name = 'calendar/Graph.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        graph1 = self.request.GET.get('graph1')
+        register = self.request.GET.get('register')
+
+        context['users'] = CustomUser.objects.all()
+
+        if register:
+            columns = ['date', 'LargeItem', 'kosu', 'register']
+            df = pd.DataFrame(columns=columns)
+            # DataFrameのLargeItem_idに基づきラベル付けするためのmap
+            mapped = {}
+            for item in LargeItem.objects.all():
+                mapped[item.id] = item.name
+
+            register_schedule = Schedule.objects.select_related().filter(register=register)
+            if register_schedule:
+                for i in Schedule.objects.select_related().filter(register=register):
+                    se = pd.Series([
+                        i.date,
+                        i.LargeItem_id,
+                        i.kosu,
+                        i.register
+                    ], columns)
+                    # 1行ずつDataFrameに追加
+                    df = df.append(se, ignore_index=True)
+            else:
+                context['NoRegistration'] = '登録データがありません。'
+                return context
+
+            df = df[df['register'].str.contains(register)]
+            # LargeItemとregisterでグループ化してkosuを合計(groupオブジェクト)→DataFrameオブジェクト化
+            grouped_df = df.groupby(['LargeItem', 'register'])['kosu'].sum().reset_index()
+            # LargeItemをmappedでラベル変換
+            grouped_df['LargeItemLabel'] = grouped_df['LargeItem'].map(mapped)
+            # 登録者、大項目で昇順ソート
+            sorted_grouped_df = grouped_df.sort_values(by=["register", 'LargeItem'], ascending=True)
+            # context辞書にDateFrameオブジェクト追加
+            context['df'] = sorted_grouped_df
+            context['register'] = sorted_grouped_df['register'].drop_duplicates().reset_index()
+            return context
+
+        else:
+            context['Graph'] = '登録者(メールアドレスの@前)を指定してください。'
+            return context

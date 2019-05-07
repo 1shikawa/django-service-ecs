@@ -36,6 +36,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'Sample.apps.SampleConfig',
+    'django.contrib.sites',  # Django-allauth
+    'allauth',  # Django-allauth
+    'allauth.account',  # Django-allauth
+    'allauth.socialaccount',  # Django-allauth
+    'accounts',
     'mycalendar',
     'bootstrap4',
 ]
@@ -127,3 +132,32 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+
+##################
+# Authentication #
+##################
+# 定義済み拡張ユーザーモデルを利用
+AUTH_USER_MODEL = 'accounts.CustomUser'
+
+# 認証方式を「メールアドレスとパスワード」に変更
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+# ユーザー名は使用しない
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_USER_MODEL_USERNAME_FIELD = None
+# ログアウト確認を非表示
+ACCOUNT_LOGOUT_ON_GET = True
+
+# ユーザー登録確認メールを送信する
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+# メールアドレスを必須項目にする
+ACCOUNT_EMAIL_REQUIRED = True
+
+SITE_ID = 1
+
+# Redirect to home URL after login (Default redirects to /accounts/profile/)
+LOGIN_REDIRECT_URL = '/'
+# LOGIN_REDIRECT_URL = '/month_with_schedule/'  # 追記箇所
+LOGIN_URL = '/accounts/login/'  # 追記箇所
+LOGOUT_REDIRECT_URL = '/'  # 追記箇所
+# ACCOUNT_LOGOUT_REDIRECT_URL = '/accounts/login/'

@@ -19,15 +19,14 @@ class Command(createsuperuser.Command):
         password = options.get('password')
         database = options.get('database')
 
-        if not (username and email and password):
+        if not (email and password):
             raise CommandError('--username, --email and --password are required options')
 
         user_data = {
-            'username': username,
             'email': email,
             'password': password,
         }
 
-        exists = self.UserModel._default_manager.db_manager(database).filter(username=username).exists()
+        exists = self.UserModel._default_manager.db_manager(database).filter(email=email).exists()
         if not exists:
             self.UserModel._default_manager.db_manager(database).create_superuser(**user_data)

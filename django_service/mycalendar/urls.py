@@ -50,5 +50,9 @@ urlpatterns = [
     path(
         'Chart/', views.Chart.as_view(), name='Chart'
     ),
+    # 個別グラフ
+    path(
+        'Graph/', views.Graph.as_view(), name='Graph'
+    ),
 
 ]

@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+<head>
+    {% block title %}グラフ表示{% endblock %}
+</head>
+
+<body>
+{% block content %}
+    <div class="col-md-3">
+        <h4 class="page-header">グラフ表示</h4>
+        <p>入力データを元にグラフ生成</p>
+        <div class="table-sm">
+            <table class="table table-bordered">
+                <thead>
+                <tr class="table-primary">
+                    <th>登録者</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for user in users %}
+                    <tr>
+                        <td>{{ user.email }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {{ Graph }}
+        <form class="form-inline" action="{% url 'mycalendar:Graph' %}" method="get">
+            {#                <input class="form-control mr-sm-2" type="month" min="2018-01" max="2019-12" aria-label="Search"#}
+            {#                       aria-label="Search"#}
+            {#                       name="graph1">#}
+            <input class="form-control mr-sm-2" type="text" aria-label="Search" name="register">
+            {% if  NoRegistration %}
+                {{ NoRegistration }}
+            {% endif %}
+            <button class="btn btn-success my-2 my-sm-0" type="submit">グラフ描画</button>
+        </form>
+{#        <a href="{% url 'mycalendar:Chart' %}" class="btn btn-success">oldグラフ描画</a><br>#}
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div>
+                    <canvas id="PieChart1"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
+    <script>
+    {% block extrajs %}
+        var ctx = document.getElementById("PieChart1").getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: [{% for index, row in df.iterrows %}
+                    '{{ row.LargeItemLabel }}',
+                {% endfor %}],
+                datasets: [{
+                    backgroundColor: [
+                        "#2ecc71",
+                        "#3498db",
+                        "#95a5a6",
+                        "#9b59b6",
+                        "#f1c40f",
+                        "#e74c3c",
+                        "#34495e"
+                    ],
+                    data: [{% for index, row in df.iterrows %}
+                        {{ row.kosu }},
+                    {% endfor %}],
+                }]
+            },
+            options: {
+                title: {
+                    display: true,
+                    position: 'bottom',
+                    fontSize: 15,
+                    {#text: 'admin'#}
+                }
+            }
+        });
+    {% endblock %}
+{% endblock %}
+</body>

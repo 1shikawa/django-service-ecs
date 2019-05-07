@@ -19,6 +19,13 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     # path('', sample.views.hello),
-    path('', include('Sample.urls')),
+    # path('', include('Sample.urls')),
+    path('accounts/', include('allauth.urls')),  # Django-allauth
     path('', include('mycalendar.urls')),
+]
+
+#Add URL maps to redirect the base URL to our application
+from django.views.generic import RedirectView
+urlpatterns += [
+    path('', RedirectView.as_view(url='/month_with_schedule', permanent=True)),
 ]
