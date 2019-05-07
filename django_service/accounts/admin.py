@@ -40,3 +40,33 @@ class CustomUserUpdateForm(UserChangeForm):
     class Meta:
         model = CustomUser
         fields = ('email',)
+
+
+class CustomUserAdmin(UserAdmin):
+    add_form_template = None
+    fieldsets = (
+        (None, {'fields': ('email', 'password')}),
+        # (_('Personal info'), {'fields': ('first_name', 'last_name', 'test')}),
+        (_('Personal info'), {'fields': ('first_name', 'last_name')}),
+        (_('Permissions'), {
+            'fields': ('is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions')
+        }),
+        (_('Important dates'), {'fields': ('last_login', 'date_joined')}),
+    )
+    add_fieldsets = fieldsets
+    form = CustomUserUpdateForm
+    add_form = CustomUserCreationForm
+    list_display = ('email', 'first_name', 'last_name', 'is_staff')
+    search_fields = ('first_name', 'last_name', 'email')
+    ordering = ('email',)
+
+
+# class ProfileAdmin(admin.ModelAdmin):
+#     fieldsets = (
+#         ('プロフィール',      {'fields': ('user', 'name', 'gendar')}),
+#         # ('gendar',      {'fields': ('gendar',)}),
+#     )
+
+
+admin.site.register(CustomUser, CustomUserAdmin)
+# admin.site.register(Profile, ProfileAdmin)

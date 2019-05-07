@@ -64,49 +64,50 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-            {#            {% if user.is_authenticated %}#}
-            <li class="nav-item active">
-                <a class="nav-link" href="{% url 'mycalendar:DailyInputList' %}">入力一覧</a>
-            </li>
-            {#            {% if user.is_staff %}#}
-            <li class="nav-item active">
-                <a class="nav-link" href="{% url 'mycalendar:DailySumList' %}">日次集計一覧</a>
-            </li>
-            {##}
-            <li class="nav-item active">
-                <a class="nav-link" href="{% url 'mycalendar:MonthlySumList' %}">月次集計一覧</a>
-            </li>
-            {#            {% endif %}#}
-                            <li>
-                                <a class="nav-item nav-link active" href="{% url 'mycalendar:Graph' %}">グラフ表示</a>
-                            </li>
-            {#                <li>#}
-            {#                    <a class="nav-item nav-link active" href="{% url 'mycalendar:datatable' %}">全登録データ</a>#}
-            {#                </li>#}
-            {#                <li>#}
-            {#                    <a class="nav-item nav-link active" href="{% url 'mycalendar:profile' user.pk %}">プロフィール</a>#}
-            {#                </li>#}
-            {#                <li class="nav-item active">#}
-            {#                    <a class="nav-link" href="{% url 'account_logout' %}">ログアウト</a>#}
-            {#                </li>#}
-            {#                </ul>#}
-            {#                <span style="color:white;" class="navbar-text navbar-right">ログイン中：{{ user.get_username }}</span>#}
-            {#            {% endif %}#}
+            {% if user.is_authenticated %}
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'mycalendar:DailyInputList' %}">入力一覧</a>
+                </li>
+                {#                        {% if user.is_staff %}#}
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'mycalendar:DailySumList' %}">日次集計一覧</a>
+                </li>
+
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'mycalendar:MonthlySumList' %}">月次集計一覧</a>
+                </li>
+{#                            {% endif %}#}
+                <li>
+                    <a class="nav-item nav-link active" href="{% url 'mycalendar:Graph' %}">グラフ表示</a>
+                </li>
+                {#                <li>#}
+                {#                    <a class="nav-item nav-link active" href="{% url 'mycalendar:datatable' %}">全登録データ</a>#}
+                {#                </li>#}
+                {#                <li>#}
+                {#                    <a class="nav-item nav-link active" href="{% url 'mycalendar:profile' user.pk %}">プロフィール</a>#}
+                {#                </li>#}
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'account_logout' %}">ログアウト</a>
+                </li>
+                {#                </ul>#}
+                {#                <span style="color:white;" class="navbar-text navbar-right">ログイン中：{{ user.get_username }}</span>#}
+            {% endif %}
             {% block navbar %}
             {% endblock %}
     </div>
 </nav>
 
-{% if messages %}
-    {% for message in messages %}
-        <div class="{{ message|bootstrap_message_classes }} alert-dismissable">
-            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&#215;</button>
-            {{ message }}
-        </div>
-    {% endfor %}
-{% endif %}
+{#{% if messages %}#}
+{#    {% for message in messages %}#}
+{#        <div class="{{ message|bootstrap_message_classes }} alert-dismissable">#}
+{#            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&#215;</button>#}
+{#            {{ message }}#}
+{#        </div>#}
+{#    {% endfor %}#}
+{#{% endif %}#}
 
 <div class="container-fluid">
+    {% bootstrap_messages %}
     {% block content %}
     {% endblock %}
 </div>

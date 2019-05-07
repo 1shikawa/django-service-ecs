@@ -161,3 +161,13 @@ LOGIN_REDIRECT_URL = '/'
 LOGIN_URL = '/accounts/login/'  # 追記箇所
 LOGOUT_REDIRECT_URL = '/'  # 追記箇所
 # ACCOUNT_LOGOUT_REDIRECT_URL = '/accounts/login/'
+
+
+##########################
+# Email SendGrid setting #
+##########################
+EMAIL_BACKEND = 'sendgrid_backend.SendgridBackend'
+EMAIL_HOST = 'ishi-work.ml'
+DEFAULT_FROM_EMAIL ='notify@ishi-work.ml'
+SENDGRID_API_KEY = os.environ['SENDGRID_API_KEY']
+SENDGRID_SANDBOX_MODE_IN_DEBUG = False

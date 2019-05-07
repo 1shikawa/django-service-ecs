@@ -3,8 +3,7 @@ import logging
 import csv
 import datetime
 from datetime import timedelta
-# from django.utils.decorators import method_decorator  # @method_decoratorに使用
-# from django.contrib.auth.decorators import login_required  # @method_decoratorに使用
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages  # メッセージフレームワーク
 from django.shortcuts import reverse, redirect, resolve_url
 from django.http import HttpResponse
@@ -28,7 +27,7 @@ locale.setlocale(locale.LC_ALL, '')
 logger = logging.getLogger(__name__)
 
 
-class MonthWithScheduleCalendar(MonthWithScheduleMixin, generic.TemplateView):
+class MonthWithScheduleCalendar(LoginRequiredMixin, MonthWithScheduleMixin, generic.TemplateView):
     """スケジュール付きの月間カレンダーを表示するビュー"""
     template_name = 'calendar/month_with_schedule.html'
 
@@ -40,7 +39,7 @@ class MonthWithScheduleCalendar(MonthWithScheduleMixin, generic.TemplateView):
         return context
 
 
-class NewMultiAdd(MonthCalendarMixin, generic.FormView):
+class NewMultiAdd(LoginRequiredMixin, MonthCalendarMixin, generic.FormView):
     """一括登録・登録後表示"""
     template_name = 'calendar/multiAdd.html'
     # form_class = BS4ScheduleFormSet
@@ -105,7 +104,7 @@ class NewMultiAdd(MonthCalendarMixin, generic.FormView):
         return redirect('mycalendar:NewMultiAdd', year=date.year, month=date.month, day=date.day)
 
 
-class NewMultiEdit(MonthCalendarMixin, generic.FormView):
+class NewMultiEdit(LoginRequiredMixin, MonthCalendarMixin, generic.FormView):
     """一括編集機能"""
     template_name = 'calendar/multiEdit.html'
     # form_class = BS4ScheduleFormSet
@@ -169,7 +168,7 @@ class NewMultiEdit(MonthCalendarMixin, generic.FormView):
         # return super().form_valid(form)
 
 
-class DailyInputList(generic.ListView):
+class DailyInputList(LoginRequiredMixin, generic.ListView):
     """入力一覧"""
     model = Schedule
     context_object_name = 'DailyInputList'
@@ -208,7 +207,7 @@ class DailyInputList(generic.ListView):
         return queryset.filter(register=str(self.request.user).split('@')[0])
 
 
-class DailySumList(generic.ListView):
+class DailySumList(LoginRequiredMixin, generic.ListView):
     """日次集計一覧"""
     model = Schedule
     context_object_name = 'DailySumList'
@@ -226,7 +225,7 @@ class DailySumList(generic.ListView):
         return context
 
 
-class MonthlySumList(generic.ListView):
+class MonthlySumList(LoginRequiredMixin, generic.ListView):
     """月次集計一覧"""
     model = Schedule
     context_object_name = 'MonthlySumList'
@@ -338,7 +337,7 @@ class Chart(generic.ListView):
         return context
 
 
-class Graph(generic.TemplateView):
+class Graph(LoginRequiredMixin, generic.TemplateView):
     """指定グラフ表示"""
     model = Schedule
     context_object_name = 'Graph'

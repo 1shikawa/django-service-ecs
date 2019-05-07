@@ -14,7 +14,7 @@
         "containerPort": 8000
       }
     ],
-    "command": 	["bash","-c","python manage.py collectstatic --noinput && python manage.py custom_createsuperuser --username admin --email admin@example.com --password admin && gunicorn django_service.wsgi -b 0.0.0.0:8000"],
+    "command": 	["bash","-c","python manage.py collectstatic --noinput && python manage.py custom_createsuperuser --email admin@example.com --password admin && gunicorn django_service.wsgi -b 0.0.0.0:8000"],
     "environment": [
       {
         "name": "VERSION_INFO",
@@ -23,6 +23,10 @@
       {
         "name": "BUILD_DATE",
         "value": ""
+      },
+      {
+        "name": "SENDGRID_API_KEY",
+        "value":"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"
       }
     ],
     "mountPoints": [
