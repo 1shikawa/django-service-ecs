@@ -82,14 +82,6 @@ WSGI_APPLICATION = 'django_service.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#         'ATOMIC_REQUESTS': True,
-#     }
-# }
-
 import pymysql
 pymysql.install_as_MySQLdb()
 
@@ -105,14 +97,6 @@ DATABASES = {
         'OPTIONS': {'charset': 'utf8mb4'}
     }
 }
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#         'ATOMIC_REQUESTS': True,
-#     }
-# }
 
 
 # Password validation
@@ -177,8 +161,7 @@ ACCOUNT_EMAIL_REQUIRED = True
 SITE_ID = 1
 
 # Redirect to home URL after login (Default redirects to /accounts/profile/)
-LOGIN_REDIRECT_URL = '/'
-# LOGIN_REDIRECT_URL = '/month_with_schedule/'  # 追記箇所
-LOGIN_URL = '/accounts/login/'  # 追記箇所
-LOGOUT_REDIRECT_URL = '/'  # 追記箇所
-# ACCOUNT_LOGOUT_REDIRECT_URL = '/accounts/login/'
+LOGIN_REDIRECT_URL = 'month_with_schedule'
+# LOGIN_REDIRECT_URL = '/month_with_schedule/'
+LOGIN_URL = '/accounts/login/'
+LOGOUT_REDIRECT_URL = '/accounts/login/'

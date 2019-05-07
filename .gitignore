@@ -106,3 +106,4 @@ venv.bak/
 static/
 .terraform/
 .vscode/settings.json
+django_service/django_service/local_settings.py
