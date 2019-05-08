@@ -156,10 +156,10 @@ ACCOUNT_EMAIL_REQUIRED = True
 SITE_ID = 1
 
 # Redirect to home URL after login (Default redirects to /accounts/profile/)
-LOGIN_REDIRECT_URL = 'month_with_schedule'
+LOGIN_REDIRECT_URL = '/'
 # LOGIN_REDIRECT_URL = '/month_with_schedule/'
 LOGIN_URL = '/accounts/login/'
-LOGOUT_REDIRECT_URL = '/accounts/login/'
+LOGOUT_REDIRECT_URL = '/'
 
 
 ##########################
