@@ -24,8 +24,9 @@ urlpatterns = [
     path('', include('mycalendar.urls')),
 ]
 
-#Add URL maps to redirect the base URL to our application
+# Add URL maps to redirect the base URL to our application
 from django.views.generic import RedirectView
+
 urlpatterns += [
     path('', RedirectView.as_view(url='/month_with_schedule', permanent=True)),
 ]

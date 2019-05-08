@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'accounts',
     'mycalendar',
     'bootstrap4',
+    'formtools'
 ]
 
 MIDDLEWARE = [
@@ -81,7 +82,9 @@ WSGI_APPLICATION = 'django_service.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
-
+############
+# Database #
+############
 import pymysql
 pymysql.install_as_MySQLdb()
 

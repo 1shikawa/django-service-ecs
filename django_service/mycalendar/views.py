@@ -12,9 +12,9 @@ from django.views import generic
 from mycalendar.models import Schedule, LargeItem
 from accounts.models import CustomUser
 from .forms import BS4ScheduleForm, BS4ScheduleNewFormSet, BS4ScheduleEditFormSet
-# from accounts.forms import ProfileUpdateForm, ContactForm
-# from formtools.preview import FormPreview
-# from django.core.mail import send_mail
+from accounts.forms import ContactForm
+from formtools.preview import FormPreview
+from django.core.mail import send_mail
 from .basecalendar import (
     MonthCalendarMixin, MonthWithScheduleMixin
 )
@@ -388,3 +388,20 @@ class Graph(LoginRequiredMixin, generic.TemplateView):
         else:
             context['Graph'] = '登録者(メールアドレスの@前)を指定してください。'
             return context
+
+
+# Create your views here.
+class Contact(FormPreview):
+    preview_template = 'account/contact_confirm.html'
+    form_template = 'account/contact.html'
+
+    def done(self, request, cleaned_data):
+        subject = cleaned_data['name']
+        message = cleaned_data['message']
+        from_email = cleaned_data['email']
+        # to = [settings.EMAIL_HOST_USER]
+        to = ['ishikawa.toru@gmail.com']
+        send_mail(subject, message, from_email, to)
+        messages.success(request, 'お問い合わせありがとうございます。')
+
+        return redirect(reverse('mycalendar:month_with_schedule', args=(), kwargs={}))

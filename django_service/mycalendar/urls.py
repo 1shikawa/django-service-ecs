@@ -1,5 +1,6 @@
 from django.urls import path, include
 from . import views
+from accounts.forms import ContactForm
 from django.views.generic.base import TemplateView
 # from accounts.forms import ContactForm
 from django.contrib.auth import views as auth_views  # ログアウトに必要
@@ -53,6 +54,10 @@ urlpatterns = [
     # 個別グラフ
     path(
         'Graph/', views.Graph.as_view(), name='Graph'
+    ),
+    # お問い合わせ
+    path(
+        'contact/', views.Contact(ContactForm), name='contact'
     ),
 
 ]

@@ -10,4 +10,5 @@ pytest-cov
 pytest-django
 pandas
 django-sendgrid-v5
+django-formtools
 
