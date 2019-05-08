@@ -6,11 +6,12 @@ resource "aws_lb_target_group" "http" {
 
   health_check {
     interval            = 30
-    path                = "/"
+    path                = "/accounts/login"
     port                = "traffic-port"
     protocol            = "HTTP"
     timeout             = 10
     healthy_threshold   = 3
     unhealthy_threshold = 3
+    matcher             = "200,301,302"  
   }
 }

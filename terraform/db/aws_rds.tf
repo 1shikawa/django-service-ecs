@@ -71,10 +71,10 @@ resource "aws_db_instance" "django-service" {
   skip_final_snapshot        = false
   port                       = 3306
   apply_immediately          = false
-  vpc_security_group_ids     = [module.mysql_sg.security_group_id]
-  parameter_group_name       = &{}
-  option_group_name          = aws_db_option_group.example.name
-  db_subnet_group_name       = aws_db_subnet_group.example.name
+  vpc_security_group_ids     = "${data.terraform_remote_state.vpc.vpc_id}"
+  parameter_group_name       = "${aws_db_parameter_group.django-service.arn}"
+  option_group_name          = "${aws_db_option_group.django-service.arn}"
+  db_subnet_group_name       = "${data.terraform_remote_state.db_subnet_group_name}"
 
   # lifecycle {
     # ignore_changes = [password]
