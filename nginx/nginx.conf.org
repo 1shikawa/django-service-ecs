@@ -22,7 +22,7 @@ http {
     server {
         listen 80 default;
         client_max_body_size 4G;
-        server_name nginx
+        server_name localhost
 
         keepalive_timeout 5;
 
