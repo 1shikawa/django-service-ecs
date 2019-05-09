@@ -1,4 +1,4 @@
-# worklog management
+# worklog management (作業工数記録管理)
 <h2>概要</h2>
 担当者がどの案件作業にどの程度時間をかけているのかを管理者が数値的かつ視覚的に把握できるアプリ<br>
 運用環境（AWS）：https://worklog-management.ml<br>
