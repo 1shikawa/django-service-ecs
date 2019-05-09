@@ -21,7 +21,7 @@
 </ul>
 
 ## システム構成
-![system](https://user-images.githubusercontent.com/40058717/57472511-8d3b2500-72c8-11e9-8802-d7046a735cc8.jpg)
+![system](https://user-images.githubusercontent.com/40058717/57473215-49491f80-72ca-11e9-83b1-00f4f59291da.jpg)
 
 ## 利用技術一覧
 <ul>
