@@ -105,5 +105,5 @@ venv.bak/
 .idea/
 static/
 .terraform/
-.vscode/settings.json
+.vscode/
 local_settings.py
