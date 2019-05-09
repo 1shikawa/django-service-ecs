@@ -1,10 +1,10 @@
 # worklog management (作業工数記録管理)
-<h2>概要</h2>
+## 概要
 担当者がどの案件作業にどの程度時間をかけているのかを管理者が数値的かつ視覚的に把握できるアプリ<br>
 運用環境（AWS）：https://worklog-management.ml<br>
 管理サイト（AWS）：https://worklog-management.ml/admin
 
-<h2>機能一覧</h2>
+## 機能一覧
 <ul>
     <li>ユーザ登録、認証機能</li>
     <li>ユーザパスワード変更、再設定機能</li>
@@ -23,7 +23,7 @@
 ## システム構成
 ![system](https://user-images.githubusercontent.com/40058717/57472511-8d3b2500-72c8-11e9-8802-d7046a735cc8.jpg)
 
-<h2>利用技術一覧</h2>
+## 利用技術一覧
 <ul>
     <li>言語/フレームワーク
     <ul>
