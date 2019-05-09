@@ -4,7 +4,6 @@
 運用環境（AWS）：https://worklog-management.ml<br>
 管理サイト（AWS）：https://worklog-management.ml/admin
 
-
 <h2>機能一覧</h2>
 <ul>
     <li>ユーザ登録、認証機能</li>
@@ -21,10 +20,8 @@
   </li>
 </ul>
 
-
 <h2>システム構成</h2>
 ![system](https://user-images.githubusercontent.com/40058717/57470257-5adaf900-72c3-11e9-8585-78b780ad7724.jpg)
-
 
 <h2>利用技術一覧</h2>
 <ul>
