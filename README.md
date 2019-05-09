@@ -22,6 +22,11 @@
 
 <h2>システム構成</h2>
 ![system](https://user-images.githubusercontent.com/40058717/57470257-5adaf900-72c3-11e9-8585-78b780ad7724.jpg)
+# 画面イメージ
+・ログイン画面
+![1](https://user-images.githubusercontent.com/40058717/46464857-5963c280-c802-11e8-968a-7e2001d3d29a.png)
+![system](https://user-images.githubusercontent.com/40058717/57470257-5adaf900-72c3-11e9-8585-78b780ad7724.jpg)
+
 
 <h2>利用技術一覧</h2>
 <ul>
