@@ -31,17 +31,17 @@
     </li>
     <li>開発環境
     <ul>
-        <li>PycharmPro,VisualStudioCode</li>
-        <li>Git,Github</li>
-        <li>Docker,Docker-Compose</li>
+        <li>(IDE)PycharmPro,VisualStudioCode</li>
+        <li>(ソースコード管理)Git,Github</li>
+        <li>(仮想環境)Docker,Docker-Compose</li>
     </ul>
     </li>
     <li>デプロイ運用環境
     <ul>
-        <li>Terraform</li>
-        <li>CircleCI</li>
-        <li>AWS VPC,ECS,EC2,ELB,Route53,S3,RDS等</li>
-        <li>SendGrid</li>
+        <li>(CI/CDパイプライン)CircleCI</li>
+        <li>(AWSインフラ構築)Terraform</li>
+        <li>(AWSリソース)VPC,ECS,EC2,ELB,Route53,S3,RDS等</li>
+        <li>(メール配信)SendGrid</li>
     </ul>
     </li>
     <li>Web(wsgi)サーバ
