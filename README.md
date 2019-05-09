@@ -20,7 +20,7 @@
   </li>
 </ul>
 
-# システム構成
+## システム構成
 ![system](https://user-images.githubusercontent.com/40058717/57472511-8d3b2500-72c8-11e9-8802-d7046a735cc8.jpg)
 
 <h2>利用技術一覧</h2>
