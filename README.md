@@ -1,11 +1,10 @@
 # worklog management
 <h2>概要</h2>
-担当者がどの案件作業にどの程度時間をかけているのかを管理者が数値的かつ視覚的に把握できるアプリ\
-運用環境（AWS）：https://worklog-management.ml\
+担当者がどの案件作業にどの程度時間をかけているのかを管理者が数値的かつ視覚的に把握できるアプリ<br>
+運用環境（AWS）：https://worklog-management.ml<br>
 管理サイト（AWS）：https://worklog-management.ml/admin
 
-
-# 機能一覧
+<h2>機能一覧</h2>
 <ul>
     <li>ユーザー認証・メール認証</li>
     <li>記事一覧表示機能</li>
@@ -21,19 +20,20 @@
     <li>統合テスト機能</li>
 </ul>
 
-# 利用技術一覧
+<h2>利用技術一覧</h2>
 <ul>
     <li>言語/フレームワーク
     <ul>
         <li>Python3.7/Django2.1</li>
-        <li>Javascript<li>
+        <li>Javascript</li>
         <li>Bootstrap4</li>
     </ul>
     </li>
     <li>開発環境
     <ul>
-        <li>PycharmPro,VSCode,Git(GitHUB)</li>
-        <li>Docker(Compose)</li>
+        <li>PycharmPro,VisualStudioCode</li>
+        <li>Git,Github</li>
+        <li>Docker,Docker-Compose</li>
     </ul>
     </li>
     <li>デプロイ運用環境
@@ -53,7 +53,7 @@
         <li>(運用環境)AWSRDS MySQL5.7</li>
     </ul>
     </li>
-    <li>テスト
+    <li>テストフレームワーク
     <ul>
         <li>Pytest</li>
     </ul>
@@ -63,8 +63,7 @@
         <li>Chart.js</li>
     </ul>
     </li>
-    <li>各種DBリレーション</li>
 </ul>
 
-# システム構成
+<h2>システム構成</h2>
 TBD
