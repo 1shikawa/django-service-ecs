@@ -7,19 +7,13 @@ class BS4ScheduleForm(forms.ModelForm):
 
     class Meta:
         model = Schedule
-        fields = ('LargeItem', 'MiddleItem', 'SmallItem', 'kosu', 'summary', 'memo')  # , 'start_time', 'end_time')
+        fields = ('LargeItem', 'MiddleItem', 'SmallItem', 'kosu', 'memo')  # , 'start_time', 'end_time')
 
         # すべてのfieldのclass属性に'form-control'を指定する
         def __init__(self, *args, **kwargs):
             super().__init__(*args, **kwargs)
             for field in self.fields.values():
                 field.widget.attrs['class'] = 'form-control'  # Bootstrap4対応
-
-        # widgets = {
-        #     'SmallItem': forms.CharField(attrs={
-        #         'class': 'form-control',
-        #     }),
-        # }
 
         # def clean_end_time(self):
         #     kosu = self.cleaned_data['kosu']
@@ -39,3 +33,10 @@ BS4ScheduleNewFormSet = forms.modelformset_factory(
 BS4ScheduleEditFormSet = forms.modelformset_factory(
     Schedule, form=BS4ScheduleForm, extra=0, can_delete=True
 )
+
+
+class ScheduleDayUpdateForm(forms.ModelForm):
+    """Scheduleレコード単位で編集するModelForm"""
+    class Meta:
+        model = Schedule
+        fields = ('LargeItem', 'MiddleItem', 'SmallItem', 'kosu', 'memo')

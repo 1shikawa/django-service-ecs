@@ -4,7 +4,7 @@ from django.contrib.auth.admin import UserAdmin
 
 
 class ScheduleAdmin(admin.ModelAdmin):
-    list_display = ('LargeItem', 'summary', 'kosu', 'date', 'totalkosu', 'register')
+    list_display = ('id', 'LargeItem', 'summary', 'kosu', 'date', 'totalkosu', 'register')
     list_display_links = ('LargeItem',)
 
 

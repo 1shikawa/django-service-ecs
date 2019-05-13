@@ -11,9 +11,10 @@ from django.urls import reverse_lazy
 from django.views import generic
 from mycalendar.models import Schedule, LargeItem
 from accounts.models import CustomUser
-from .forms import BS4ScheduleForm, BS4ScheduleNewFormSet, BS4ScheduleEditFormSet
+from .forms import BS4ScheduleForm, BS4ScheduleNewFormSet, BS4ScheduleEditFormSet, ScheduleDayUpdateForm
 from accounts.forms import ContactForm
 from formtools.preview import FormPreview
+from pure_pagination.mixins import PaginationMixin  # ページネーション
 from django.core.mail import send_mail
 from .basecalendar import (
     MonthCalendarMixin, MonthWithScheduleMixin
@@ -168,61 +169,61 @@ class NewMultiEdit(LoginRequiredMixin, MonthCalendarMixin, generic.FormView):
         # return super().form_valid(form)
 
 
-class DailyInputList(LoginRequiredMixin, generic.ListView):
+class DailyInputList(LoginRequiredMixin, PaginationMixin, generic.ListView):
     """入力一覧"""
     model = Schedule
     context_object_name = 'DailyInputList'
     template_name = 'calendar/DailyInputList.html'
+    paginate_by = 10
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        # 基準日
-        today = datetime.date.today()
-        # 基準日の31日前を算出
-        before_31_days = today - datetime.timedelta(days=1) * 31
-        # 当日から1ヶ月前までを取得
-        context['DailyInputList'] = Schedule.objects.filter(date__range=(before_31_days, today)).filter(
-            register=str(self.request.user).split('@')[0]).order_by('-date')
-        context['InputCount'] = Schedule.objects.filter(date__range=(before_31_days, today)).filter(
-            register=str(self.request.user).split('@')[0]).count()
-        context['InputCountDescription'] = '直近1ヶ月'
+    def get_queryset(self):
+        queryset = super().get_queryset()
         keyword1 = self.request.GET.get('keyword1')
-
         if keyword1:
             year, month = keyword1.split('-')
             # 指定年月の月初日
             first_of_month = datetime.date(int(year), int(month), 1)
             # 指定年月の月末日取得
             last_of_month = datetime.date(int(year), int(month), 1) + relativedelta(months=1) + timedelta(days=-1)
-            context['DailyInputList'] = Schedule.objects.filter(date__range=(first_of_month, last_of_month)).filter(
-                register=str(self.request.user)).order_by('date')
-            context['InputCount'] = Schedule.objects.filter(date__range=(first_of_month, last_of_month)).filter(
-                register=str(self.request.user)).count()
-            context['InputCountDescription'] = '指定年月'
-        logger.info("User:{} DailyInputList successfully.".format(str(self.request.user)))
-        return context
-
-    def get_queryset(self):
-        queryset = super().get_queryset()
-        return queryset.filter(register=str(self.request.user).split('@')[0])
+            queryset = Schedule.objects.filter(date__range=(first_of_month, last_of_month)).filter(
+                register=str(self.request.user).split('@')[0]).order_by('-date')
+            logger.info("User:{} DailyInputList successfully.".format(str(self.request.user)))
+            return queryset
+        else:
+            return queryset.filter(register=str(self.request.user).split('@')[0]).order_by('-date')
 
 
-class DailySumList(LoginRequiredMixin, generic.ListView):
+class ScheduleDayUpdate(LoginRequiredMixin, generic.UpdateView):
+    """日次データ更新"""
+    model = Schedule
+    template_name = 'calendar/ScheduleDayUpdate.html'
+    form_class = ScheduleDayUpdateForm
+    success_url = reverse_lazy('mycalendar:DailyInputList')
+
+    def form_valid(self, form):
+        date = form.instance.date
+        messages.success(self.request, date.strftime('%Y年%m月%d日') + "を更新しました。")
+        logger.info("User:{} ScheduleDayUpdate in {} successfully.".format(str(self.request.user), date))
+        return super().form_valid(form)
+
+
+class DailySumList(LoginRequiredMixin, PaginationMixin, generic.ListView):
     """日次集計一覧"""
     model = Schedule
     context_object_name = 'DailySumList'
     template_name = 'calendar/DailySumList.html'
+    paginate_by = 10
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
+    def get_queryset(self):
+        queryset = super().get_queryset()
         # 基準日
         today = datetime.date.today()
         # 基準日の31日前を算出
         before_31_days = today - datetime.timedelta(days=1) * 31
-        context['DailySumList'] = Schedule.objects.select_related().filter(date__range=(before_31_days, today)).values(
+        queryset = Schedule.objects.select_related().filter(date__range=(before_31_days, today)).values(
             'date', 'register').annotate(DailySum=Sum('kosu')).order_by('-date')
         logger.info("User:{} DailySumList successfully.".format(str(self.request.user)))
-        return context
+        return queryset
 
 
 class MonthlySumList(LoginRequiredMixin, generic.ListView):

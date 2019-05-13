@@ -11,6 +11,7 @@
 {% block content %}
     <div class="col-md-12 main">
         <h4 class="page-header">月次集計一覧</h4>
+        <span>登録者、大項目ごとの月次集計</span>
         <form class="form-inline my-2 my-lg-0" method="get" action="{% url 'mycalendar:MonthlySumList' %}">
             <input class="form-control mr-sm-2" type="month" min="2018-01" max="201-12" aria-label="Search"
                    name="keyword1">

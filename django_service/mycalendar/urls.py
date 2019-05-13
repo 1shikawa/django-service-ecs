@@ -1,9 +1,6 @@
 from django.urls import path, include
 from . import views
 from accounts.forms import ContactForm
-from django.views.generic.base import TemplateView
-# from accounts.forms import ContactForm
-from django.contrib.auth import views as auth_views  # ログアウトに必要
 
 app_name = 'mycalendar'
 
@@ -25,6 +22,7 @@ urlpatterns = [
         'month_with_schedule/NewMultiAdd/<int:year>/<int:month>/<int:day>',
         views.NewMultiAdd.as_view(), name='NewMultiAdd'
     ),
+    # 複数更新
     path(
         'month_with_schedule/NewMultiEdit/<int:year>/<int:month>/<int:day>',
         views.NewMultiEdit.as_view(), name='NewMultiEdit'
@@ -32,6 +30,10 @@ urlpatterns = [
     # 入力一覧
     path(
         'DailyInputList/', views.DailyInputList.as_view(), name='DailyInputList'
+    ),
+    # 日次更新
+    path(
+        'ScheduleDayUpdate/<int:pk>', views.ScheduleDayUpdate.as_view(), name='ScheduleDayUpdate'
     ),
 
     # 日次集計
