@@ -26,7 +26,7 @@
       },
       {
         "name": "SENDGRID_API_KEY",
-        "value":"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"
+        "value":""
       }
     ],
     "mountPoints": [
