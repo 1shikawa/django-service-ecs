@@ -44,7 +44,7 @@
     <ul>
         <li>(CI/CDパイプライン)CircleCI</li>
         <li>(AWSインフラ構築)Terraform,AWS CLI</li>
-        <li>(AWSリソース)VPC,ECS,EC2,ELB,Route53,SSL,S3,RDS等</li>
+        <li>(AWSリソース)IAM,VPC,ECS,EC2,ELB,Route53,SSL,S3,RDS等</li>
         <li>(メール配信)SendGrid</li>
     </ul>
     </li>
