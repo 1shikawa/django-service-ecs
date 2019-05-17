@@ -393,6 +393,7 @@ class Graph(LoginRequiredMixin, generic.TemplateView):
 
 # Create your views here.
 class Contact(FormPreview):
+    """お問い合わせ"""
     preview_template = 'account/contact_confirm.html'
     form_template = 'account/contact.html'
 

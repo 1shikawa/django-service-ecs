@@ -44,7 +44,7 @@
 
         <div class="col-md-2">
             <span>集計データをCSV出力</span><br>
-            <form action="{% url 'mycalendar:SumExport' %}" method="get">
+            <form class="form-inline my-2 my-lg-0" action="{% url 'mycalendar:SumExport' %}" method="get">
                 <input class="form-control mr-sm-2" type="month" min="2018-01" max="2019-12" aria-label="Search"
                        name="csvexport">
                 <button class="btn btn-primary " type="submit">CSV出力</button>

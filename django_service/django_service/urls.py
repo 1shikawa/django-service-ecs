@@ -16,6 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+# 管理画面表示名変更
+admin.site.site_title = 'タイトルタグ'
+admin.site.site_header = 'アプリ管理サイト'
+admin.site.index_title = 'メニュー'
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     # path('', sample.views.hello),

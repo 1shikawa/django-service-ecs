@@ -76,7 +76,7 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="{% url 'mycalendar:MonthlySumList' %}">月次集計一覧</a>
                 </li>
-{#                            {% endif %}#}
+                {#                            {% endif %}#}
                 <li>
                     <a class="nav-item nav-link active" href="{% url 'mycalendar:Graph' %}">グラフ表示</a>
                 </li>
@@ -84,8 +84,8 @@
                 {#                    <a class="nav-item nav-link active" href="{% url 'mycalendar:datatable' %}">全登録データ</a>#}
                 {#                </li>#}
                 {#                <li>#}
-                {#                    <a class="nav-item nav-link active" href="{% url 'mycalendar:profile' user.pk %}">プロフィール</a>#}
-                {#                </li>#}
+                <a class="nav-item nav-link active" href="{% url 'account_change_password' %}">パスワード変更</a>
+                </li>
                 <li class="nav-item active">
                     <a class="nav-link" href="{% url 'account_logout' %}">ログアウト</a>
                 </li>
