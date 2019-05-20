@@ -1,5 +1,6 @@
 import locale
 import logging
+# import structlog
 import csv
 import datetime
 from datetime import timedelta
@@ -26,7 +27,7 @@ import pandas as pd
 
 locale.setlocale(locale.LC_ALL, '')
 logger = logging.getLogger(__name__)
-
+# logger = structlog.get_logger(__name__)
 
 class MonthWithScheduleCalendar(LoginRequiredMixin, MonthWithScheduleMixin, generic.TemplateView):
     """スケジュール付きの月間カレンダーを表示するビュー"""

@@ -12,4 +12,3 @@ pandas
 django-sendgrid-v5
 django-formtools
 django-pure-pagination
-
