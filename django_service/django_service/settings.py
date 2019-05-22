@@ -40,6 +40,9 @@ INSTALLED_APPS = [
     'allauth',  # Django-allauth
     'allauth.account',  # Django-allauth
     'allauth.socialaccount',  # Django-allauth
+    'allauth.socialaccount.providers.twitter',  # Django-allauth
+    'allauth.socialaccount.providers.google',  # Django-allauth
+    'allauth.socialaccount.providers.github',  # Django-allauth
     'accounts',
     'mycalendar',
     'bootstrap4',
@@ -83,6 +86,7 @@ WSGI_APPLICATION = 'django_service.wsgi.application'
 # Database #
 ############
 import pymysql
+
 pymysql.install_as_MySQLdb()
 
 DATABASES = {
@@ -135,7 +139,6 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
-
 ##################
 # Authentication #
 ##################
@@ -163,12 +166,11 @@ LOGIN_REDIRECT_URL = '/'
 LOGIN_URL = '/accounts/login/'
 LOGOUT_REDIRECT_URL = '/'
 
-
 ##########################
 # Email SendGrid setting #
 ##########################
 EMAIL_BACKEND = 'sendgrid_backend.SendgridBackend'
 EMAIL_HOST = 'ishi-work.ml'
-DEFAULT_FROM_EMAIL ='notify@ishi-work.ml'
+DEFAULT_FROM_EMAIL = 'notify@ishi-work.ml'
 SENDGRID_API_KEY = os.environ['SENDGRID_API_KEY']
 SENDGRID_SANDBOX_MODE_IN_DEBUG = False

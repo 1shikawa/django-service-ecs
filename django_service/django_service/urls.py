@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+# from django_service import settings
 
 # 管理画面表示名変更
 admin.site.site_title = 'タイトルタグ'
@@ -35,3 +36,10 @@ from django.views.generic import RedirectView
 urlpatterns += [
     path('', RedirectView.as_view(url='/month_with_schedule', permanent=True)),
 ]
+
+# if settings.DEBUG:
+#     import debug_toolbar
+#
+#     urlpatterns += [
+#         path('__debug__/', include(debug_toolbar.urls)),
+#     ]

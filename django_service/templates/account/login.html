@@ -29,7 +29,7 @@
                 <a href="#">工数記録管理アプリ</a>
             </h2>
             <div class="row justify-content-center">
-                <div class="col-lg-4 col-md-6 col-sm-8">
+                <div class="col-lg-5 col-md-6 col-sm-8">
                     <div class="card">
                         <div class="card-body">
                             <h6 class="card-title">メールアドレスとパスワードを入力後、<br>ログインして下さい。</h6>
@@ -42,17 +42,21 @@
                                 <div class="form-group">
                                     {% csrf_token %}
                                     {% bootstrap_form form %}
-                                    <button type="submit" class="btn btn-primary btn-block">ログイン</button>
+                                    <button type="submit" class="btn btn-success btn-block">メールアドレスでログイン</button>
+                                    <p><a href="{% url 'account_reset_password' %}"
+                                          class="text-muted">パスワードをお忘れの方はこちらから</a></p>
+                                    <a class="btn btn-primary btn-block"
+                                       href="{% url 'twitter_login' %}">Twitterアカウントでログイン</a>
+                                    <a class="btn btn-danger btn-block"
+                                        href="{% url 'google_login' %}">Googleアカウントでログイン</a>
+                                    <a class="btn btn-dark btn-block"
+                                        href="{% url 'github_login' %}">GitHubアカウントでログイン</a>
                                 </div>
                             </form>
 
                             <div class="text-center py-2">
-                                <small>
-                                    <p><a href="{% url 'account_reset_password' %}"
-                                          class="text-muted">パスワードをお忘れの方はこちらから</a></p>
-                                    <a href="{% url 'mycalendar:contact' %}"
-                                       class="text-muted">お問い合わせはこちらから</a>
-                                </small>
+                                <a href="{% url 'mycalendar:contact' %}"
+                                   class="text-muted">お問い合わせはこちらから</a>
                                 <br>
                             </div>
                         </div>
