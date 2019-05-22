@@ -71,6 +71,7 @@ jobs:
             echo 'export ECS_CLUSTER_NAME="${AWS_RESOURCE_NAME_PREFIX}-cluster"' >> $BASH_ENV
             echo 'export ECS_SERVICE_NAME="${AWS_RESOURCE_NAME_PREFIX}-service"' >> $BASH_ENV
             echo 'export TASK_DEFINITION_NAME="${AWS_RESOURCE_NAME_PREFIX}-service"' >> $BASH_ENV
+            echo 'export TASK_DEFINITION_MIGRATE_NAME="${AWS_RESOURCE_NAME_PREFIX}-migrate"' >> $BASH_ENV
             echo 'export FULL_IMAGE_NAME="${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${AWS_RESOURCE_NAME_PREFIX}:${CIRCLE_SHA1}"' >> $BASH_ENV
       - run:
           name: aws ecr login
@@ -86,7 +87,7 @@ jobs:
       - run:
           name: ecs migration
           command: |
-            aws ecs run-task --cluster django-cluster --task-definition django-migrate
+            aws ecs run-task --cluster $ECS_CLUSTER_NAME --task-definition $TASK_DEFINITION_MIGRATE_NAME
       - run:
           name: Test deployment
           command: |
