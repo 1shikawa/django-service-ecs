@@ -42,6 +42,9 @@ INSTALLED_APPS = [
     'allauth',  # Django-allauth
     'allauth.account',  # Django-allauth
     'allauth.socialaccount',  # Django-allauth
+    'allauth.socialaccount.providers.twitter',  # Django-allauth
+    'allauth.socialaccount.providers.google',  # Django-allauth
+    'allauth.socialaccount.providers.github',  # Django-allauth
     'accounts',
     'mycalendar',
     'bootstrap4',
@@ -160,6 +163,8 @@ ACCOUNT_LOGOUT_ON_GET = True
 ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 # メールアドレスを必須項目にする
 ACCOUNT_EMAIL_REQUIRED = True
+# ソーシャルアカウントはメール検証なし
+SOCIALACCOUNT_EMAIL_VERIFICATION = 'none'
 
 SITE_ID = 1
 
