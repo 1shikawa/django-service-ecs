@@ -170,7 +170,7 @@ LOGOUT_REDIRECT_URL = '/'
 # Email SendGrid setting #
 ##########################
 EMAIL_BACKEND = 'sendgrid_backend.SendgridBackend'
-EMAIL_HOST = 'ishi-work.ml'
-DEFAULT_FROM_EMAIL = 'notify@ishi-work.ml'
+EMAIL_HOST = 'worklog-management.ml'
+DEFAULT_FROM_EMAIL = 'notify@worklog-management.ml'
 SENDGRID_API_KEY = os.environ['SENDGRID_API_KEY']
 SENDGRID_SANDBOX_MODE_IN_DEBUG = False

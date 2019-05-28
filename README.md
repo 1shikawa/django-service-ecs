@@ -25,7 +25,7 @@
 </ul>
 
 ## システム構成
-![図1](https://user-images.githubusercontent.com/40058717/57585262-a5a57c80-7520-11e9-9861-af8d9bd797b3.jpg)
+![図1](https://user-images.githubusercontent.com/40058717/58461379-7d498f00-816a-11e9-875e-3f36f3e15311.jpg)
 
 ## 利用技術一覧
 <ul>
@@ -43,11 +43,11 @@
         <li>(仮想環境)Docker,Docker-Compose</li>
     </ul>
     </li>
-    <li>デプロイ運用環境
+    <li>テスト・デプロイ運用環境
     <ul>
         <li>(CI/CDパイプライン)CircleCI</li>
         <li>(AWSインフラ構築)Terraform,AWS CLI</li>
-        <li>(AWSリソース)IAM,VPC,ECS,EC2,ELB,Route53,SSL,S3,RDS等</li>
+        <li>(AWSリソース)IAM,VPC,ECS,EC2,ELB,Route53,ACM,S3,RDS等</li>
         <li>(メール配信)SendGrid</li>
     </ul>
     </li>
