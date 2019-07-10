@@ -43,9 +43,10 @@
         <li>(仮想環境)Docker,Docker-Compose</li>
     </ul>
     </li>
-    <li>テスト・デプロイ運用環境
+    <li>テスト・デプロイ(コンテナ)運用環境
     <ul>
         <li>(CI/CDパイプライン)CircleCI</li>
+        <li>(テスト環境)Docker,Docker-Compose</li>
         <li>(AWSインフラ構築)Terraform,AWS CLI</li>
         <li>(AWSリソース)IAM,VPC,ECS,EC2,ELB,Route53,ACM,S3,RDS等</li>
         <li>(メール配信)SendGrid</li>
@@ -69,6 +70,10 @@
     <li>グラフ作成
     <ul>
         <li>Chart.js</li>
+    </ul>
+    <li>メッセージサービス
+    <ul>
+        <li>SendGrid</li>
     </ul>
     </li>
 </ul>
