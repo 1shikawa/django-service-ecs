@@ -49,7 +49,7 @@
         <li>(テスト環境)Docker,Docker-Compose</li>
         <li>(AWSインフラ構築)Terraform,AWS CLI</li>
         <li>(AWSリソース)IAM,VPC,ECS,EC2,ELB,Route53,ACM,S3,RDS等</li>
-        <li>(メール配信)SendGrid</li>
+        <li>(メール配信サービス)SendGrid</li>
     </ul>
     </li>
     <li>Web(wsgi)サーバ
@@ -71,9 +71,4 @@
     <ul>
         <li>Chart.js</li>
     </ul>
-    <li>メッセージサービス
-    <ul>
-        <li>SendGrid</li>
-    </ul>
-    </li>
 </ul>
