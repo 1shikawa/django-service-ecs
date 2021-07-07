@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-# from django_service import settings
+# from django.conf import settings
 
 # 管理画面表示名変更
 admin.site.site_title = 'タイトルタグ'
